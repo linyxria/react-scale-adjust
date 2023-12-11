@@ -1,0 +1,56 @@
+{
+  "name": "react-scale-adjust",
+  "version": "0.1.0",
+  "description": "scale-adjust react wrapper",
+  "author": "linyxria",
+  "repository": "linyxria/react-scale-adjust",
+  "license": "MIT",
+  "keywords": [
+    "scale",
+    "resize",
+    "react",
+    "react-scale",
+    "scale-adjust"
+  ],
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/react-scale-adjust.umd.cjs",
+  "module": "./dist/react-scale-adjust.js",
+  "types": "./dist/react-scale-adjust.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/react-scale-adjust.js",
+      "require": "./dist/react-scale-adjust.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && pnpm lint && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "prepublishOnly": "pnpm build"
+  },
+  "dependencies": {
+    "scale-adjust": "^0.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.7",
+    "vite-plugin-dts": "^3.6.4"
+  }
+}
