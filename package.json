@@ -1,6 +1,6 @@
 {
   "name": "react-scale-adjust",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "scale-adjust react wrapper",
   "author": "linyxria",
   "repository": "linyxria/react-scale-adjust",
@@ -39,8 +39,8 @@
     "@types/node": "^20.10.4",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
-    "@typescript-eslint/eslint-plugin": "^6.13.2",
-    "@typescript-eslint/parser": "^6.13.2",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.55.0",
     "eslint-plugin-react": "^7.33.2",
@@ -52,5 +52,8 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.7",
     "vite-plugin-dts": "^3.6.4"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0"
   }
 }
