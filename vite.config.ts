@@ -12,11 +12,11 @@ export default defineConfig({
       fileName: 'react-scale-adjust',
     },
     rollupOptions: {
-      external: ['react', 'react/jsx-runtime', 'react-dom'],
+      external: ['react', 'react/jsx-runtime'],
       output: {
         globals: {
           react: 'React',
-          'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'ReactJsxRuntime',
         },
       },
     },
