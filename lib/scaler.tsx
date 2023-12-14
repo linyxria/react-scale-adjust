@@ -14,7 +14,7 @@ import useScaler, { UseScalerOptions } from './use-scaler'
 
 type ScaleCallback = (scale: number) => void
 
-export interface ScalerProps<TReference extends HTMLElement>
+export interface ScalerProps<TReference extends Element>
   extends UseScalerOptions<HTMLDivElement, TReference>,
     React.DetailedHTMLProps<
       React.HTMLAttributes<HTMLDivElement>,
@@ -23,12 +23,12 @@ export interface ScalerProps<TReference extends HTMLElement>
   onScale?: ScaleCallback
 }
 
-export interface ScalerRef<TReference extends HTMLElement> {
+export interface ScalerRef<TReference extends Element> {
   element: HTMLDivElement | null
   scaler: Scaler<HTMLDivElement, TReference> | null
 }
 
-const Component = forwardRef(function Scaler<TReference extends HTMLElement>(
+const Component = forwardRef(function Scaler<TReference extends Element>(
   {
     width,
     height,

@@ -2,16 +2,13 @@ import { RefObject, useEffect, useRef, useState } from 'react'
 import { Scaler, ScalerOptions } from 'scale-adjust'
 
 export interface UseScalerOptions<
-  TTarget extends HTMLElement,
-  TReference extends HTMLElement
+  TTarget extends Element,
+  TReference extends Element
 > extends Pick<ScalerOptions<TTarget, TReference>, 'width' | 'height'> {
   reference?: RefObject<TReference>
 }
 
-const useScaler = <
-  TTarget extends HTMLElement,
-  TReference extends HTMLElement
->({
+const useScaler = <TTarget extends Element, TReference extends Element>({
   width,
   height,
   reference,
