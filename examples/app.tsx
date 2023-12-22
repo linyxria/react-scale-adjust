@@ -13,11 +13,12 @@ const App = () => {
       <Scaler
         width={1920}
         height={1080}
+        transition
         reference={parentRef}
-        style={{ background: 'orange' }}
         onScale={(scale) => {
           console.log('scale:', scale)
         }}
+        style={{ background: 'orange' }}
       >
         Hello world!
       </Scaler>

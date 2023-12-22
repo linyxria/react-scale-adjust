@@ -4,13 +4,17 @@ import { Scaler, ScalerOptions } from 'scale-adjust'
 export interface UseScalerOptions<
   TTarget extends Element,
   TReference extends Element
-> extends Pick<ScalerOptions<TTarget, TReference>, 'width' | 'height'> {
+> extends Pick<
+    ScalerOptions<TTarget, TReference>,
+    'width' | 'height' | 'transition'
+  > {
   reference?: RefObject<TReference>
 }
 
 const useScaler = <TTarget extends Element, TReference extends Element>({
   width,
   height,
+  transition,
   reference,
 }: UseScalerOptions<TTarget, TReference>): [
   RefObject<TTarget>,
@@ -25,17 +29,13 @@ const useScaler = <TTarget extends Element, TReference extends Element>({
       return
     }
 
-    const options: ScalerOptions<TTarget, TReference> = {
+    const scaler = new Scaler<TTarget, TReference>({
       el: ref.current,
       width,
       height,
-    }
-
-    if (reference?.current) {
-      options.reference = reference.current
-    }
-
-    const scaler = new Scaler<TTarget, TReference>(options)
+      transition,
+      reference: reference?.current ?? undefined,
+    })
 
     if (import.meta.env.DEV) {
       console.log('Scaler instance is created.')
@@ -44,7 +44,7 @@ const useScaler = <TTarget extends Element, TReference extends Element>({
     setScaler(scaler)
 
     return () => void scaler.destroy()
-  }, [height, reference, width])
+  }, [height, reference, transition, width])
 
   return [ref, scaler]
 }

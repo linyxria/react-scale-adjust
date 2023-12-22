@@ -32,6 +32,7 @@ const Component = forwardRef(function Scaler<TReference extends Element>(
   {
     width,
     height,
+    transition,
     reference,
     onScale,
     children,
@@ -42,6 +43,7 @@ const Component = forwardRef(function Scaler<TReference extends Element>(
   const [$el, scaler] = useScaler<HTMLDivElement, TReference>({
     width,
     height,
+    transition,
     reference,
   })
 
