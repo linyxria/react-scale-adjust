@@ -1,12 +1,10 @@
 import {
+  DetailedHTMLProps,
   ForwardedRef,
   forwardRef,
+  HTMLAttributes,
   PropsWithChildren,
-  useCallback,
-  useEffect,
   useImperativeHandle,
-  useLayoutEffect,
-  useRef,
 } from 'react'
 import { Scaler } from 'scale-adjust'
 
@@ -16,10 +14,7 @@ type ScaleCallback = (scale: number) => void
 
 export interface ScalerProps<TReference extends Element>
   extends UseScalerOptions<HTMLDivElement, TReference>,
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLDivElement>,
-      HTMLDivElement
-    > {
+    DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   onScale?: ScaleCallback
 }
 
@@ -40,42 +35,25 @@ const Component = forwardRef(function Scaler<TReference extends Element>(
   }: PropsWithChildren<ScalerProps<TReference>>,
   ref: ForwardedRef<ScalerRef<TReference>>
 ) {
-  const [$el, scaler] = useScaler<HTMLDivElement, TReference>({
+  const { ref: targetRef, scaler } = useScaler<HTMLDivElement, TReference>({
     width,
     height,
     transition,
     reference,
+    onScale,
   })
-
-  const onScaleRef = useRef<ScaleCallback>()
-  useLayoutEffect(() => {
-    onScaleRef.current = onScale
-  })
-  const scaleHandler = useCallback<ScaleCallback>((...args) => {
-    onScaleRef.current?.(...args)
-  }, [])
-
-  useEffect(() => {
-    if (!scaler) {
-      return
-    }
-
-    scaler.listen(({ scale }) => {
-      scaleHandler(scale)
-    })
-  }, [scaleHandler, scaler])
 
   useImperativeHandle(
     ref,
     () => ({
-      element: $el.current,
+      element: targetRef.current,
       scaler,
     }),
-    [$el, scaler]
+    [scaler, targetRef]
   )
 
   return (
-    <div {...props} ref={$el}>
+    <div {...props} ref={targetRef}>
       {children}
     </div>
   )

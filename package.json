@@ -1,9 +1,12 @@
 {
   "name": "react-scale-adjust",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "scale-adjust react wrapper",
   "author": "linyxria",
-  "repository": "linyxria/react-scale-adjust",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linyxria/react-scale-adjust.git"
+  },
   "license": "MIT",
   "keywords": [
     "scale",
@@ -33,7 +36,7 @@
     "prepublishOnly": "pnpm build"
   },
   "dependencies": {
-    "scale-adjust": "^0.6.0"
+    "scale-adjust": "^0.7.2"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",

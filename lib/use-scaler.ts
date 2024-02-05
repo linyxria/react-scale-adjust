@@ -1,35 +1,27 @@
-import { RefObject, useEffect, useRef, useState } from 'react'
+import { RefObject, useEffect, useRef } from 'react'
 import { Scaler, ScalerOptions } from 'scale-adjust'
 
 export interface UseScalerOptions<
-  TTarget extends Element,
-  TReference extends Element
+  Target extends Element,
+  Reference extends Element
 > extends Pick<
-    ScalerOptions<TTarget, TReference>,
+    ScalerOptions<Target, Reference>,
     'width' | 'height' | 'transition'
   > {
-  reference?: RefObject<TReference>
+  reference?: RefObject<Reference>
+  onScale?: (scale: number) => void
 }
 
-const useScaler = <TTarget extends Element, TReference extends Element>({
-  width,
-  height,
-  transition,
-  reference,
-}: UseScalerOptions<TTarget, TReference>): [
-  RefObject<TTarget>,
-  scaler: Scaler<TTarget, TReference> | null
-] => {
-  const ref = useRef<TTarget>(null)
-
-  const [scaler, setScaler] = useState<Scaler<TTarget, TReference> | null>(null)
+const useScaler = <Target extends Element, Reference extends Element>(
+  options: UseScalerOptions<Target, Reference>
+) => {
+  const ref = useRef<Target>(null)
+  const scalerRef = useRef<Scaler<Target, Reference> | null>(null)
+  const optionsRef = useRef(options)
 
   useEffect(() => {
-    if (!ref.current) {
-      return
-    }
-
-    const scaler = new Scaler<TTarget, TReference>({
+    const { width, height, transition, reference, onScale } = optionsRef.current
+    const scaler = new Scaler<Target, Reference>({
       el: ref.current,
       width,
       height,
@@ -37,16 +29,21 @@ const useScaler = <TTarget extends Element, TReference extends Element>({
       reference: reference?.current ?? undefined,
     })
 
-    if (import.meta.env.DEV) {
-      console.log('Scaler instance is created.')
+    if (onScale) {
+      scaler.listen(({ scale }) => {
+        onScale(scale)
+      })
     }
 
-    setScaler(scaler)
+    scalerRef.current = scaler
 
     return () => void scaler.destroy()
-  }, [height, reference, transition, width])
+  }, [])
 
-  return [ref, scaler]
+  return {
+    ref,
+    scaler: scalerRef.current,
+  }
 }
 
 export default useScaler
