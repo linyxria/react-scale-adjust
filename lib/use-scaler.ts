@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef } from 'react'
+import { RefObject, useEffect, useRef, useState } from 'react'
 import { Scaler, ScalerOptions } from 'scale-adjust'
 
 export interface UseScalerOptions<
@@ -19,6 +19,8 @@ const useScaler = <Target extends Element, Reference extends Element>(
   const scalerRef = useRef<Scaler<Target, Reference> | null>(null)
   const optionsRef = useRef(options)
 
+  const [scale, setScale] = useState(1)
+
   useEffect(() => {
     const { width, height, transition, reference, onScale } = optionsRef.current
     const scaler = new Scaler<Target, Reference>({
@@ -29,11 +31,10 @@ const useScaler = <Target extends Element, Reference extends Element>(
       reference: reference?.current ?? undefined,
     })
 
-    if (onScale) {
-      scaler.listen(({ scale }) => {
-        onScale(scale)
-      })
-    }
+    scaler.listen(({ scale }) => {
+      setScale(scale)
+      onScale?.(scale)
+    })
 
     scalerRef.current = scaler
 
@@ -43,6 +44,7 @@ const useScaler = <Target extends Element, Reference extends Element>(
   return {
     ref,
     scaler: scalerRef.current,
+    scale,
   }
 }
 

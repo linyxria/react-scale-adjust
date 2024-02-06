@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   scale-adjust:
-    specifier: ^0.7.2
-    version: 0.7.2
+    specifier: ^0.7.3
+    version: 0.7.3
 
 devDependencies:
   '@types/node':
@@ -2611,8 +2611,8 @@ packages:
       is-regex: 1.1.4
     dev: true
 
-  /scale-adjust@0.7.2:
-    resolution: {integrity: sha512-CNeRqztHGVnpQCiSeVVha3FIhcS3Zy35eJxO9KoFZjudQxNxkEFbgLGMGu5c6PUKIg74/NkJKBO3py89w+lx3w==}
+  /scale-adjust@0.7.3:
+    resolution: {integrity: sha512-FSWDfBK/cqIAAPafk5VNii9KxB11R5JNIuOWy4w5X3/WMo6T4ErvU/+SgNDX7fxSAVCGaTCq+H1BjbJW9LaSzg==}
     dev: false
 
   /scheduler@0.23.0:
