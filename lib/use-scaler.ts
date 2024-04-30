@@ -1,43 +1,31 @@
-import { RefObject, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Scaler, ScalerOptions } from 'scale-adjust'
 
-export interface UseScalerOptions<
-  Target extends Element,
-  Reference extends Element
-> extends Pick<
-    ScalerOptions<Target, Reference>,
-    'width' | 'height' | 'transition'
-  > {
-  reference?: RefObject<Reference>
+export interface UseScalerOptions<E extends HTMLElement>
+  extends Pick<ScalerOptions<E>, 'width' | 'height'> {
   onScale?: (scale: number) => void
 }
 
-const useScaler = <Target extends Element, Reference extends Element>(
-  options: UseScalerOptions<Target, Reference>
-) => {
-  const ref = useRef<Target>(null)
-  const scalerRef = useRef<Scaler<Target, Reference> | null>(null)
-  const optionsRef = useRef(options)
-
+const useScaler = <E extends HTMLElement>({
+  width,
+  height,
+  onScale,
+}: UseScalerOptions<E>) => {
+  const ref = useRef<E>(null)
+  const scalerRef = useRef<Scaler<E> | null>(null)
   const [scale, setScale] = useState(1)
 
   useEffect(() => {
-    const { width, height, transition, reference, onScale } = optionsRef.current
-    const scaler = new Scaler<Target, Reference>({
+    const scaler = new Scaler<E>({
       el: ref.current,
       width,
       height,
-      transition,
-      reference: reference?.current ?? undefined,
     })
-
-    scaler.listen(({ scale }) => {
+    scaler.onScale((scale) => {
       setScale(scale)
-      onScale?.(scale)
+      onScale && onScale(scale)
     })
-
     scalerRef.current = scaler
-
     return () => void scaler.destroy()
   }, [])
 

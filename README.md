@@ -11,25 +11,21 @@ pnpm add react-scale-adjust
 ## 使用
 
 ```tsx
-import { Scaler } from 'react-scale-adjust'
+import { Scaler } from '../lib/main'
 
 const App = () => {
-  const parentRef = useRef<HTMLDivElement>(null)
-  
   return (
-    <div
-      ref={parentRef}
-      style={{ width: '64vw', height: '48vh', background: 'purple' }}
-    >
-      <Scaler 
-        width={1920} 
+    <div style={{ width: '60vw', height: '47vh', backgroundColor: 'darkcyan' }}>
+      <Scaler
+        width={1920}
         height={1080}
-        reference={parentRef}
+        onScale={(scale) => {
+          console.log('scale:', scale)
+        }}
         style={{ background: 'orange' }}
-        onScale={(scale) => { console.log('scale:', scale) }}
       >
-        Hello world!
-      <Scaler>
+        Hello, world!
+      </Scaler>
     </div>
   )
 }
