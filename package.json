@@ -1,6 +1,6 @@
 {
   "name": "react-scale-adjust",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "scale-adjust react wrapper",
   "author": "linyxria",
   "repository": {
@@ -35,7 +35,7 @@
     "prepublishOnly": "pnpm build"
   },
   "dependencies": {
-    "scale-adjust": "^0.8.0"
+    "scale-adjust": "^0.8.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.1.1",
