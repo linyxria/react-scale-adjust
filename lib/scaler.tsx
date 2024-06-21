@@ -18,10 +18,10 @@ export interface ScalerRef {
   scale: number
 }
 
-const Component = forwardRef(function Scaler(
+const ReactScaler = (
   { width, height, onScale, children, ...props }: ScalerProps,
   ref: React.ForwardedRef<ScalerRef>
-) {
+) => {
   const {
     ref: element,
     scaler,
@@ -39,7 +39,7 @@ const Component = forwardRef(function Scaler(
       scaler,
       scale,
     }),
-    [scaler, scale]
+    [element, scale, scaler]
   )
 
   return (
@@ -47,6 +47,7 @@ const Component = forwardRef(function Scaler(
       {children}
     </div>
   )
-})
+}
 
-export default Component
+const ForwardRefExoticScaler = forwardRef(ReactScaler)
+export default ForwardRefExoticScaler
