@@ -1,6 +1,6 @@
 {
   "name": "react-scale-adjust",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "scale-adjust react wrapper",
   "author": "linyxria",
   "repository": {
@@ -34,9 +34,6 @@
     "preview": "vite preview",
     "prepublishOnly": "npm run build"
   },
-  "dependencies": {
-    "scale-adjust": "^0.9.0"
-  },
   "devDependencies": {
     "@eslint/compat": "^1.1.0",
     "@eslint/js": "^9.5.0",
@@ -59,6 +56,7 @@
     "vite-plugin-dts": "^3.9.1"
   },
   "peerDependencies": {
-    "react": ">=17.0.0"
+    "react": ">=17.0.0",
+    "scale-adjust": ">=0.9.1"
   }
 }
